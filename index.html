@@ -3,47 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
+    <meta name="theme-color" content="#0c1220">
+    <meta name="description" content="A simple, polished calculator for everyday math.">
+    <title>Orbit — Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <div class="calculator">
-            <form>
-                <div class="display">
-                    <input type="text" name="display">
-                </div>
-                <div>
-                    <input type="button" value="AC" onclick="display.value = '' " class="operator">
-                    <input type="button" value="DEL" onclick="display.value = display.value.toString().slice(0, -1)" class="operator">
-                    <input type="button" value="." onclick="display.value += '.' " class="operator">
-                    <input type="button" value="/" onclick="display.value += '/' " class="operator">
-                </div>
-                <div>
-                    <input type="button" value="7" onclick="display.value += '7' ">
-                    <input type="button" value="8" onclick="display.value += '8' ">
-                    <input type="button" value="9" onclick="display.value += '9' ">
-                    <input type="button" value="*" onclick="display.value += '*' " class="operator">
-                </div>
-                <div>
-                    <input type="button" value="4" onclick="display.value += '4' ">
-                    <input type="button" value="5" onclick="display.value += '5' ">
-                    <input type="button" value="6" onclick="display.value += '5' ">
-                    <input type="button" value="-" onclick="display.value += '-' " class="operator">
-                </div>
-                <div>
-                    <input type="button" value="1" onclick="display.value += '1' ">
-                    <input type="button" value="2" onclick="display.value += '2' ">
-                    <input type="button" value="3" onclick="display.value += '3' ">
-                    <input type="button" value="+" onclick="display.value += '+' " class="operator">
-                </div>
-                <div>
-                    <input type="button" value="00" onclick="display.value += '00' ">
-                    <input type="button" value="0" onclick="display.value += '0' ">
-                    <input type="button" value="=" onclick="display.value = eval(display.value)" class="equal operator">
-                </div>
-            </form>
-        </div>
-    </div>
+    <main class="page-shell">
+        <header class="topbar">
+            <a class="brand" href="#" aria-label="Orbit calculator home">
+                <span class="brand-mark" aria-hidden="true">O</span>
+                <span>orbit<span class="brand-dot">.</span></span>
+            </a>
+            <button class="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch theme">
+                <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path></svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.4A8.8 8.8 0 0 1 8.6 3.8 8.8 8.8 0 1 0 20.2 15.4Z"></path></svg>
+            </button>
+        </header>
+
+        <section class="workspace" aria-label="Calculator">
+            <div class="intro">
+                <p class="eyebrow"><span class="status-dot"></span> YOUR EVERYDAY CALCULATOR</p>
+                <h1>Make numbers<br><span>make sense.</span></h1>
+                <p class="intro-copy">A little clarity for whatever you’re working out.</p>
+            </div>
+
+            <div class="calculator-layout">
+                <section class="calculator-card" aria-label="Calculator keypad">
+                    <div class="calculator-topline">
+                        <span class="card-label">QUICK CALCULATE</span>
+                        <span class="live-indicator"><span></span> READY</span>
+                    </div>
+                    <div class="display" aria-live="polite">
+                        <div class="expression" data-expression aria-label="Expression"></div>
+                        <div class="result" data-display aria-label="Display">0</div>
+                    </div>
+                    <div class="keypad">
+                        <button class="key key-utility" type="button" data-action="clear">AC</button>
+                        <button class="key key-utility" type="button" data-action="delete" aria-label="Delete last character">⌫</button>
+                        <button class="key key-utility" type="button" data-value="%">%</button>
+                        <button class="key key-operator" type="button" data-value="/">÷</button>
+
+                        <button class="key" type="button" data-value="7">7</button>
+                        <button class="key" type="button" data-value="8">8</button>
+                        <button class="key" type="button" data-value="9">9</button>
+                        <button class="key key-operator" type="button" data-value="*">×</button>
+
+                        <button class="key" type="button" data-value="4">4</button>
+                        <button class="key" type="button" data-value="5">5</button>
+                        <button class="key" type="button" data-value="6">6</button>
+                        <button class="key key-operator" type="button" data-value="-">−</button>
+
+                        <button class="key" type="button" data-value="1">1</button>
+                        <button class="key" type="button" data-value="2">2</button>
+                        <button class="key" type="button" data-value="3">3</button>
+                        <button class="key key-operator" type="button" data-value="+">+</button>
+
+                        <button class="key key-utility" type="button" data-action="sign" aria-label="Change sign">+/−</button>
+                        <button class="key" type="button" data-value="0">0</button>
+                        <button class="key" type="button" data-value=".">.</button>
+                        <button class="key key-equals" type="button" data-action="equals" aria-label="Calculate">=</button>
+                    </div>
+                    <div class="keyboard-hint"><span class="keyboard-icon">⌨</span> Tip: you can use your keyboard</div>
+                </section>
+
+                <aside class="history-card" aria-label="Calculation history">
+                    <div class="history-heading">
+                        <div>
+                            <p class="card-label">YOUR WORKSPACE</p>
+                            <h2>Recent</h2>
+                        </div>
+                        <button class="clear-history" type="button" data-action="clear-history" aria-label="Clear calculation history" title="Clear history">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 14h10l1-14M9 7V4h6v3"></path></svg>
+                        </button>
+                    </div>
+                    <div class="history-list" data-history>
+                        <div class="empty-history">
+                            <span class="empty-icon" aria-hidden="true">↗</span>
+                            <p>Your calculations<br>will show up here.</p>
+                        </div>
+                    </div>
+                    <button class="copy-button" type="button" data-action="copy">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg>
+                        <span data-copy-label>Copy result</span>
+                    </button>
+                </aside>
+            </div>
+            <footer class="footer-note"><span>BUILT FOR THE LITTLE THINGS</span><span>© ORBIT 2026</span></footer>
+        </section>
+    </main>
 </body>
 </html>
